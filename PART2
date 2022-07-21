@@ -1,0 +1,48 @@
+local p = 0
+local l = 0
+local amount_ofItems = 0
+local AmountCalculations = 0
+local countUpToCALCULATE = 0
+local GripRotationZ = 0
+local GripRotationY = 0
+local GripRotationX = 0
+v = game.Players.LocalPlayer
+local Char = v.Character
+local PlayerBackPack = v.Backpack:GetChildren()
+for ilo, vlo in pairs(Char:GetChildren()) do
+    if vlo:IsA("Tool") then
+        vlo.Parent = v.Backpack
+        PlayerBackPack = v.Backpack:GetChildren()
+    end
+end
+for ilope, tvqle in pairs(PlayerBackPack) do
+    amount_ofItems = amount_ofItems + 1
+end
+local amountZe = 8
+local calculationsTWO = 0
+local f = 0
+for ilop, tvql in pairs(PlayerBackPack) do
+    tvql.GripPos = Vector3.new(0 + f, 0 + l, 0 + p)
+    tvql.GripUp = Vector3.new(0 + GripRotationX, 1 + GripRotationY, 0 + GripRotationZ)
+    tvql.Parent = Char
+    if tvql.Handle:FindFirstChild('ParticleEmitter') ~= nil then
+        tvql.Handle:FindFirstChild('ParticleEmitter'):Destroy()
+    end
+    if tvql.Handle:FindFirstChild('Trail') ~= nil then
+        tvql.Handle:FindFirstChild('Trail'):Destroy()
+    end
+    if tvql.Handle:FindFirstChild('Mesh') ~= nil then
+        tvql.Handle:FindFirstChild('Mesh'):Destroy()
+    end
+
+    --how tall and fat
+    AmountCalculations = amount_ofItems / amountZe * 1
+    f = f + 0.8
+    countUpToCALCULATE = countUpToCALCULATE + 1
+    if countUpToCALCULATE >= AmountCalculations then
+        l = l - 1.5
+        f = 0
+        GripRotationX = GripRotationX + 0
+        countUpToCALCULATE = 0
+    end
+end
